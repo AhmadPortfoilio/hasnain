@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testimonial Section</title>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <style>
+    :root {
+      --theme-color: #ff6a00;        /* Orange */
+      --bg-color: #000000;           /* Black */
+      --bg-color-2: #0a0a0a;         /* Rich Black */
+      --text-color: #f1f1f1;         /* Smooth White */
+    }
+
+    body {
+      background: var(--bg-color);
+      color: white;
+      height: 100vh;
+      font-family: 'Noto Sans Thaana', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .testimonial-section {
+      position: relative;
+      padding: 80px 20px;
+      overflow: hidden;
+    }
+    
+    .bg-element {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.15;
+      z-index: -1;
+    }
+    
+    .bg-element-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--theme-color);
+      top: -100px;
+      left: -100px;
+    }
+    
+    .bg-element-2 {
+      width: 600px;
+      height: 600px;
+      background: #00f0ff;
+      bottom: -200px;
+      right: -200px;
+    }
+    
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .section-subtitle {
+      color: var(--theme-color);
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .section-title {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    
+    .section-description {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    
+    .benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .benefit-item svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--theme-color);
+    }
+    
+    .benefit-item span {
+      font-size: 16px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: var(--theme-color);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      width: fit-content;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 106, 0, 0.3);
+    }
+    
+    .testimonial-slider {
+      background: var(--bg-color-2);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+    
+    .testimonial-content {
+      font-size: 20px;
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 30px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .author-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--theme-color);
+    }
+    
+    .author-info {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .author-name {
+      font-weight: 600;
+      font-size: 18px;
+    }
+    
+    .author-title {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+    }
+    
+    .swiper-pagination {
+      position: relative !important;
+      margin-top: 40px;
+    }
+    
+    .swiper-pagination-bullet {
+      
+      opacity: 1 !important;
+      width: 10px !important;
+      height: 10px !important;
+    }
+    
+    .swiper-pagination-bullet-active {
+      background: var(--theme-color) !important;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: var(--theme-color) !important;
+      width: 50px !important;
+      height: 50px !important;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      backdrop-filter: blur(5px);
+    }
+    
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+      font-size: 20px !important;
+      font-weight: bold;
+      background: transparent !important;
+    }
+    
+    @media (max-width: 992px) {
+      .section-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .section-title {
+        font-size: 36px;
+      }
+      
+      .testimonial-slider {
+        padding: 30px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .testimonial-section {
+        padding: 60px 15px;
+      }
+      
+      .section-title {
+        font-size: 32px;
+      }
+      
+      .section-description {
+        font-size: 16px;
+      }
+      
+      .testimonial-content {
+        font-size: 18px;
+      }
+      
+      .swiper-button-next,
+      .swiper-button-prev {
+        display: none !important;
+      }
+    }
+    </style>
+</head>
+
+<body>
+  <section class="testimonial-section">
+    <div class="bg-element bg-element-1"></div>
+    <div class="bg-element bg-element-2"></div>
+
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-subtitle">Real Clients. Real Growth.</p>
+        <h2 class="section-title">Results That Speak</h2>
+        <p class="section-description">
+          Hear what our clients have to say about their experience working with us and the results they've achieved.
+        </p>
+
+        <div class="benefits">
+          <div class="benefit-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+            </svg>
+            <span>30-Day Satisfaction Promise</span>
+          </div>
+          <div class="benefit-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+            </svg>
+            <span>100% UK & US Clients</span>
+          </div>
+          <div class="benefit-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+            </svg>
+            <span>Fully Done-For-You</span>
+          </div>
+        </div>
+
+        <a href="#" class="cta-button">See More Results</a>
+      </div>
+
+      <div class="testimonial-slider swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="testimonial-content">
+              "We closed $30k in 45 days thanks to WebGrowWin. Their strategic approach to digital marketing transformed
+              our lead generation and significantly boosted our conversions."
+            </div>
+            <div class="testimonial-author">
+              <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Client" class="author-image" />
+              <div class="author-info">
+                <span class="author-name">Sarah Johnson</span>
+                <span class="author-title">CPA, United States</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="testimonial-content">
+              "Now I'm fully booked. Clients just find and book me. The system they implemented works like clockwork,
+              bringing in qualified leads consistently without me having to chase anyone."
+            </div>
+            <div class="testimonial-author">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="author-image" />
+              <div class="author-info">
+                <span class="author-name">David Miller</span>
+                <span class="author-title">EMS Trainer, United Kingdom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="testimonial-content">
+              "Finally, a system I can trust. After wasting money on other marketing agencies, WebGrowWin delivered
+              actual results with complete transparency and regular reporting."
+            </div>
+            <div class="testimonial-author">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" class="author-image" />
+              <div class="author-info">
+                <span class="author-name">Emily Chen</span>
+                <span class="author-title">Aesthetic Clinic Owner</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="testimonial-content">
+              "Our revenue increased by 140% in just 3 months. The team at WebGrowWin understood our niche perfectly and
+              created a tailored strategy that outperformed all our expectations."
+            </div>
+            <div class="testimonial-author">
+              <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client" class="author-image" />
+              <div class="author-info">
+                <span class="author-name">Michael Rodriguez</span>
+                <span class="author-title">Legal Consultant</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+  </section>
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const testimonialSwiper = new Swiper('.testimonial-slider', {
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    });
+</script>
+
+</body>
+
+</html>

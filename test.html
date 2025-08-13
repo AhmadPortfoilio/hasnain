@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<title>Glass Cards Scroll Animation</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+    color: #fff;
+    min-height: 200vh;
+}
+
+.glass-heading {
+    position: absolute;
+    top: 40px;
+    font-size: 4rem;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 2px white;
+    text-transform: uppercase;
+    transition: all 0.5s ease;
+    margin-left: 30px;
+}
+
+.glass-heading.active {
+    color: #fff;
+    -webkit-text-stroke: 0px;
+}
+
+.glass-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.glass-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    justify-content: center;
+}
+
+.glass-card {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.459);
+    border-radius: 16px;
+    border: 1px solid rgb(255, 255, 255);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateX(150%);
+    color: black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.glass-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.glass-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.glass-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.glass-link {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+.glass-link:hover {
+    color: #fff;
+}
+</style>
+</head>
+<body>
+<div style="height:100vh"></div>
+
+<section class="glass-section" id="glass-services">
+  <h2 class="glass-heading">Our Services</h2>
+  <div class="glass-container">
+    <div class="glass-card">
+      <div class="glass-icon"><i class="fas fa-code"></i></div>
+      <h3 class="glass-title">Funnels That Convert</h3>
+      <p class="glass-text">Lead capture pages with irresistible offers.</p>
+      <a href="#" class="glass-link">Learn more <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="glass-card">
+      <div class="glass-icon"><i class="fas fa-mobile-alt"></i></div>
+      <h3 class="glass-title">Email & SMS Automation</h3>
+      <p class="glass-text">Nurture leads automatically until they book or buy.</p>
+      <a href="#" class="glass-link">Learn more <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="glass-card">
+      <div class="glass-icon"><i class="fas fa-paint-brush"></i></div>
+      <h3 class="glass-title">SEO That Drives Traffic</h3>
+      <p class="glass-text">Local SEO, Google Business, and on-page optimization to get found.</p>
+      <a href="#" class="glass-link">Learn more <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="glass-card">
+      <div class="glass-icon"><i class="fas fa-chart-line"></i></div>
+      <h3 class="glass-title">AI Chatbots & CRM</h3>
+      <p class="glass-text">Chatbots that answer questions, qualify leads, and sync with your CRM.</p>
+      <a href="#" class="glass-link">Learn more <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="glass-card">
+      <div class="glass-icon"><i class="fas fa-cloud"></i></div>
+      <h3 class="glass-title">Booking Systems</h3>
+      <p class="glass-text">Integrated scheduling and reminders — no more back and forth.</p>
+      <a href="#" class="glass-link">Learn more <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="glass-card">
+      <div class="glass-icon"><i class="fas fa-shield-alt"></i></div>
+      <h3 class="glass-title">Analytics & Tracking</h3>
+      <p class="glass-text">Full performance reporting so you know exactly what’s working.</p>
+      <a href="#" class="glass-link">Learn more <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+const glassCards = document.querySelectorAll(".glass-card");
+const glassHeading = document.querySelector(".glass-heading");
+
+gsap.to(glassHeading, {
+  scrollTrigger: {
+    trigger: "#glass-services",
+    start: "top 10px",
+    toggleClass: { targets: glassHeading, className: "active" }
+  }
+});
+
+const tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: "#glass-services",
+    start: "top top",
+    end: "+=2000",
+    scrub: true,
+    pin: true
+  }
+});
+
+glassCards.forEach((card, i) => {
+  tl.to(card, {
+    opacity: 1,
+    translateX: 0,
+    ease: "power2.out",
+    duration: 0.5
+  });
+});
+</script>
+
+</body>
+</html>
